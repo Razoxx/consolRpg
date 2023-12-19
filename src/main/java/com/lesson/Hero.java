@@ -2,6 +2,9 @@ package com.lesson;
 
 
 
-class Hero  {
+class Hero extends Character {
+    public Hero(String name, int health, int attack){
+        super(name,health,attack);
+    }
 
 }

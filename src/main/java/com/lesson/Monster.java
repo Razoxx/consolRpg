@@ -1,8 +1,9 @@
 package com.lesson;
 
-import java.util.Random;
 
+class Monster extends Character  {
 
-class Monster {
-
+    public Monster(String name, int health, int attack) {
+        super(name, health, attack);
+    }
 }
