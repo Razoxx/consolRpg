@@ -1,7 +1,7 @@
 package com.lesson;
 
 import java.util.Random;
-import java.util.Scanner;
+
 
 class Monster {
     private String name;
