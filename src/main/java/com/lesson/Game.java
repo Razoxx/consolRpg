@@ -1,7 +1,6 @@
 package com.lesson;
 
 
-
-public class RpgGame {
+class Game {
 
 }

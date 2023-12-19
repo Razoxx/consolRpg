@@ -1,7 +1,5 @@
 package com.lesson;
 
-
-
-class Hero  {
+class Character {
 
 }
