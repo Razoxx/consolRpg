@@ -6,5 +6,5 @@ class Monster extends Character {
         super(name, health, attack);
     }
 
-    // Дополнительные методы или свойства для монстра
+
 }
