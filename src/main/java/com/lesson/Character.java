@@ -17,7 +17,11 @@ class Character {
     public void receiveDamage() {
 
     }
+    public void isAlive() {
+        return;
+    }
+    public void rest() {
 
-
+    }
 }
 
