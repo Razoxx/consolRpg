@@ -5,22 +5,24 @@ import java.util.Scanner;
 
 
 class Game {
-    private Hero hero;
-    private Monster monster;
-    private Scanner scanner;
-    private Random random;
+     Hero hero;
+     Monster monster;
+     Scanner scanner;
+     Random random;
+     int dropGold;
 
     public Game(String heroName) {
         scanner = new Scanner(System.in);
         random = new Random();
-        hero = new Hero(heroName, 150, 20);
-        monster = new Monster("Монстр(а)", 160, 20);
+        hero = new Hero(heroName, 150, 25);
+        monster = new Monster("Орк", 150, 20, 5, 10);
     }
 
     public void start() {
         System.out.println("//////________\\\\\\\\\\\\\\");
                 System.out.println("     Старт игры");
         System.out.println("//////________\\\\\\\\\\\\\\");
+        System.out.println("");
         System.out.println("Герой " + hero.name + " вошел в лес и увидел " + monster.name + ". Игра началась");
 
         while (hero.isAlive() && monster.isAlive()) {
@@ -34,7 +36,9 @@ class Game {
     }
 
     private void battlePhase(Character attacker, Character target) {
+        System.out.println("");
         System.out.println("Режим битвы");
+        System.out.println("");
         System.out.println("Выбери действие: 1.Атака 2.Защита 3.Уклонение");
 
         int command = scanner.nextInt();
@@ -55,6 +59,7 @@ class Game {
 
     private void printResult() {
         if (hero.isAlive()) {
+            dropGold = monster.droppedGold();
             System.out.println("Герой " + hero.name + " победил!");
         } else {
             System.out.println("Монстр " + monster.name + " победил!");
