@@ -1,9 +1,9 @@
 package com.lesson;
 
 class Character {
-    protected String name;
-    protected int health;
-    protected int attack;
+     String name;
+     int health;
+     int attack;
 
     public Character(String name, int health, int attack) {
         this.name = name;
