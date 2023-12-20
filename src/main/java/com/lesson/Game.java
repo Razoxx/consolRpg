@@ -12,8 +12,7 @@ class Game {
     public Game(String heroName) {
         scanner = new Scanner(System.in);
         random = new Random();
-        hero = new Hero();
-        monster = new Monster();
+        hero = new Hero(heroName, 150, 20);
+        monster = new Monster("Орк", 177, 19);
     }
-
 }

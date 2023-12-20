@@ -3,7 +3,7 @@ package com.lesson;
 
 
 class Hero extends Character {
-    public Hero() {
-
+    public Hero(String name, int health, int attack) {
+        super(name, health, attack);
     }
     }
