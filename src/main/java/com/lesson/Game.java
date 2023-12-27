@@ -19,11 +19,9 @@ class Game {
     }
 
     public void start() {
-        System.out.println("//////________\\\\\\\\\\\\\\");
-                System.out.println("     Старт игры");
-        System.out.println("//////________\\\\\\\\\\\\\\");
-        System.out.println("");
-        System.out.println("Герой " + hero.name + " вошел в лес и увидел " + monster.name + ". Игра началась");
+
+                System.out.println("\nСтарт игры\n");
+                System.out.println("Герой " + hero.name + " вошел в лес и увидел " + monster.name + ". Игра началась");
 
         while (hero.isAlive() && monster.isAlive()) {
             battlePhase(hero, monster);
@@ -36,9 +34,8 @@ class Game {
     }
 
     private void battlePhase(Character attacker, Character target) {
-        System.out.println("");
-        System.out.println("Режим битвы");
-        System.out.println("");
+
+        System.out.println("\nРежим битвы\n");
         System.out.println("Выбери действие: 1.Атака 2.Защита 3.Уклонение");
 
         int command = scanner.nextInt();
