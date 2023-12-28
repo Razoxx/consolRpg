@@ -12,5 +12,7 @@ public class RpgGame {
 
         Game game = new Game(heroName);
         game.start();
+        game.shop();
+
     }
 }
