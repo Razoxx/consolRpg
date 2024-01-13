@@ -16,7 +16,7 @@ class Shop {
             System.out.println((i + 1) + ". " + items.get(i).getName() + " (" + items.get(i).getCost() + " золота)");
         }
         System.out.println((items.size() + 1) + ". Покинуть магазин");
-        return false;
+        return true;  // Возвращаем true, чтобы программа продолжала выполнение после посещения магазина
     }
 
     public Item purchaseItem(int choice, Hero hero) {

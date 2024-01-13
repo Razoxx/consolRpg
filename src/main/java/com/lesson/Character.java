@@ -1,16 +1,22 @@
 package com.lesson;
 
-import java.util.Random;
-
 class Character {
     String name;
-     int health;
-     int attack;
+    int health;
+    int attack;
 
     public Character(String name, int health, int attack) {
         this.name = name;
         this.health = health;
         this.attack = attack;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getHealth() {
+        return health;
     }
 
     public void attack(Character target) {
@@ -24,7 +30,6 @@ class Character {
     }
 
     public boolean isAlive() {
-
         return health > 0;
     }
 
@@ -32,7 +37,4 @@ class Character {
         System.out.println(name + " отдыхает и восполняет здоровье.");
         health++;
     }
-
 }
-
-

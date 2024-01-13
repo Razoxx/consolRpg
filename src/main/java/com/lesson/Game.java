@@ -6,12 +6,13 @@ import java.util.Scanner;
 
 
 class Game {
-     Hero hero;
-     Monster monster;
-     Scanner scanner;
-     Random random;
-     int dropGold;
-    Shop shop;
+    private Hero hero;
+    private Monster monster;
+    private Scanner scanner;
+    private Random random;
+    private Shop shop;
+    private int dropGold;
+
     public Game(String heroName) {
         scanner = new Scanner(System.in);
         random = new Random();
@@ -21,9 +22,8 @@ class Game {
     }
 
     public void start() {
-
-                System.out.println("\nСтарт игры\n");
-                System.out.printf("Герой %S  вошел в лес и увидел %S. Игра началась", hero.name, monster.name );
+        System.out.println("\nСтарт игры\n");
+        System.out.printf("Герой %s вошел в лес и увидел %s. Игра началась", hero.getName(), monster.getName());
 
         while (hero.isAlive() && monster.isAlive()) {
             battlePhase(hero, monster);
@@ -34,9 +34,30 @@ class Game {
 
         printResult();
     }
+    public void shop() {
+        while (true) {
+            shop.displayItems();  // Отображаем предметы в магазине
+            System.out.println("У вас " + hero.getGold() + " золота.");
+            System.out.println("Ваш инвентарь:");
+            for (Item item : hero.getInventory()) {
+                System.out.println("- " + item.getName());
+            }
+
+            int choice = scanner.nextInt();
+            Item purchasedItem = shop.purchaseItem(choice, hero);  // Покупаем выбранный предмет
+
+            if (purchasedItem != null) {
+                if (purchasedItem instanceof HealthPotion) {
+                    ((HealthPotion) purchasedItem).use(hero); // Используем зелье здоровья
+                    hero.getInventory().remove(purchasedItem); // Удаляем использованное зелье из инвентаря
+                }
+            } else {
+                break;  // Если вернулся null, значит игрок решил покинуть магазин
+            }
+        }
+    }
 
     private void battlePhase(Character attacker, Character target) {
-
         System.out.println("\nРежим битвы\n");
         System.out.println("Выбери действие: 1.Атака 2.Защита 3.Уклонение 4.Магазин");
 
@@ -49,54 +70,25 @@ class Game {
             }
         } else if (command == 2) {
             attacker.rest();
-        }
-        else if(command == 4){
-            shop.displayItems();
-
-        }
-        else {
+        } else if (command == 4) {
+            shop();
+        } else {
             System.out.println("Пропуск хода ");
         }
 
-
-        System.out.printf("У %S сейчас %S единиц здоровья ", target.name,  target.health );
+        System.out.printf("У %s сейчас %s единиц здоровья ", target.getName(), target.getHealth());
     }
-    void shop() {
-        while (true) {
-            shop.displayItems();  // Отображаем предметы в магазине
-            System.out.println("У вас " + hero.getGold() + " золота.");
-            System.out.println("Ваш инвентарь:");
-            ArrayList<Item> inventory = hero.getInventory();
-            if (inventory.isEmpty()) {
-                System.out.println("Инвентарь пуст.");
-            } else {
-                for (Item item : inventory) {
-                    System.out.println("- " + item.getName());
-                }
-            }
 
-            int choice = scanner.nextInt();
-            Item purchasedItem = shop.purchaseItem(choice, hero);  // Покупаем выбранный предмет
 
-            if (purchasedItem != null) {
-                if (purchasedItem instanceof HealthPotion) {
-                    ((HealthPotion) purchasedItem).use(hero); // Используем зелье здоровья
-                    inventory.remove(purchasedItem); // Удаляем использованное зелье из инвентаря
-                }
-            } else {
-                break;  // Если вернулся null, значит игрок решил покинуть магазин
-            }
-        }
-    }
     private void printResult() {
         if (hero.isAlive()) {
-            dropGold = monster.droppedGold();
-            System.out.println("Герой " + hero.name + " победил!");
+            shop();
+            System.out.println("Герой " + hero.getName() + " победил!");
+            System.out.println("Получено " + dropGold + " золота.");
         } else {
-            System.out.println("Монстр " + monster.name + " победил!");
+            System.out.println("Монстр " + monster.getName() + " победил!");
         }
 
         System.out.println("Игра окончена");
-        shop();
     }
 }

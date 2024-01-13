@@ -3,7 +3,7 @@ package com.lesson;
 
 import java.util.ArrayList;
 
-import static java.lang.Character.getName;
+
 
 class Hero extends Character {
     private int gold;
@@ -37,8 +37,8 @@ class Hero extends Character {
         System.out.println(getName() + " восстановил " + amount + " здоровья. Теперь у него " + health + " здоровья.");
     }
 
-    public boolean getName() {
-        return false;
+    public String getName() {
+        return name;
     }
 
     public ArrayList<Item> getInventory() {
