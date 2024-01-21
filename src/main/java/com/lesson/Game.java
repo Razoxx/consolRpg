@@ -11,7 +11,7 @@ class Game {
     private Scanner scanner;
     private Random random;
     Shop shop;
-    private int dropGold;
+    
 
     public Game(String heroName) {
         scanner = new Scanner(System.in);
@@ -69,8 +69,8 @@ class Game {
 
             if (purchasedItem != null) {
                 if (purchasedItem instanceof HealthPotion) {
-                    ((HealthPotion) purchasedItem).use(hero); // Используем зелье здоровья
-                    hero.getInventory().remove(purchasedItem); // Удаляем использованное зелье из инвентаря
+                    purchasedItem.use(hero); // Используем зелье здоровья
+
                 }
             } else {
                 break;  // Если вернулся null, значит игрок решил покинуть магазин
@@ -83,7 +83,8 @@ class Game {
         if (hero.isAlive()) {
 
             System.out.println("Герой " + hero.getName() + " победил!");
-            System.out.println("Получено " + dropGold + " золота.");
+            int droppedGold = monster.droppedGold();
+            System.out.println("Получено " + droppedGold + " золота.");
         } else {
             System.out.println("Монстр " + monster.getName() + " победил!");
         }

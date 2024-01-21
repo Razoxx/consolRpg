@@ -37,4 +37,5 @@ class Character {
         System.out.println(name + " отдыхает и восполняет здоровье.");
         health++;
     }
+
 }
