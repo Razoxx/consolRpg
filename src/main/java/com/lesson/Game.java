@@ -10,7 +10,7 @@ class Game {
     private Monster monster;
     private Scanner scanner;
     private Random random;
-    private Shop shop;
+    Shop shop;
     private int dropGold;
 
     public Game(String heroName) {
@@ -34,28 +34,7 @@ class Game {
 
         printResult();
     }
-    public void shop() {
-        while (true) {
-            shop.displayItems();  // Отображаем предметы в магазине
-            System.out.println("У вас " + hero.getGold() + " золота.");
-            System.out.println("Ваш инвентарь:");
-            for (Item item : hero.getInventory()) {
-                System.out.println("- " + item.getName());
-            }
 
-            int choice = scanner.nextInt();
-            Item purchasedItem = shop.purchaseItem(choice, hero);  // Покупаем выбранный предмет
-
-            if (purchasedItem != null) {
-                if (purchasedItem instanceof HealthPotion) {
-                    ((HealthPotion) purchasedItem).use(hero); // Используем зелье здоровья
-                    hero.getInventory().remove(purchasedItem); // Удаляем использованное зелье из инвентаря
-                }
-            } else {
-                break;  // Если вернулся null, значит игрок решил покинуть магазин
-            }
-        }
-    }
 
     private void battlePhase(Character attacker, Character target) {
         System.out.println("\nРежим битвы\n");
@@ -79,10 +58,30 @@ class Game {
         System.out.printf("У %s сейчас %s единиц здоровья ", target.getName(), target.getHealth());
     }
 
+    public void shop() {
+        while(true)  {
+            shop.displayItems();  // Отображаем предметы в магазине
+            System.out.println("У вас " + hero.getGold() + " золота.");
+            System.out.println("Ваш инвентарь:");
+
+            int choice = scanner.nextInt();
+            Item purchasedItem = shop.purchaseItem(choice, hero);  // Покупаем выбранный предмет
+
+            if (purchasedItem != null) {
+                if (purchasedItem instanceof HealthPotion) {
+                    ((HealthPotion) purchasedItem).use(hero); // Используем зелье здоровья
+                    hero.getInventory().remove(purchasedItem); // Удаляем использованное зелье из инвентаря
+                }
+            } else {
+                break;  // Если вернулся null, значит игрок решил покинуть магазин
+            }
+        }
+    }
+
 
     private void printResult() {
         if (hero.isAlive()) {
-            shop();
+
             System.out.println("Герой " + hero.getName() + " победил!");
             System.out.println("Получено " + dropGold + " золота.");
         } else {
